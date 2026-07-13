@@ -1,4 +1,13 @@
-resource "aws_instance" "web" { 
-     ami = "ami-123456" 
-     instance_type = var.instance_type 
+provider "aws" {
+  region = var.region
+}
+
+resource "aws_instance" "web" {
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = var.key_name
+
+  tags = {
+    Name = var.instance_name
+  }
 }
