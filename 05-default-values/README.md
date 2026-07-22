@@ -35,3 +35,15 @@ variable "instance_type" {
   type = string
   default = "t3.micro"
 }
+
+Variable Validation
+validation {
+  condition     = contains(["ap-south-1", "us-east-1"], var.region)
+  error_message = "Invalid region selected."
+}
+
+Variable Precedence
+-var
+-var-file
+terraform.tfvars
+default value
