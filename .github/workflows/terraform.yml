@@ -38,6 +38,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      # 5. Generate Terraform plan
+      # 5. Generate Terraform plan m
       - name: Terraform Plan
         run: terraform plan
