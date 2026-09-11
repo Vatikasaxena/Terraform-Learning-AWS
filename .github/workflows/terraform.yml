@@ -7,3 +7,37 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: Terraform CI/CD
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./terraform-cicd
+
+    steps:
+
+      # 1. Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      # 3. Initialize Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # 4. Validate Terraform configuration
+      - name: Terraform Validate
+        run: terraform validate
+
+      # 5. Generate Terraform plan
+      - name: Terraform Plan
+        run: terraform plan
