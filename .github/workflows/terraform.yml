@@ -16,6 +16,7 @@ jobs:
   terraform:
     name: Terraform CI/CD
     runs-on: ubuntu-latest
+    environment: production
 
     defaults:
       run:
@@ -48,3 +49,7 @@ jobs:
       # 5. Generate Terraform plan m
       - name: Terraform Plan
         run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
