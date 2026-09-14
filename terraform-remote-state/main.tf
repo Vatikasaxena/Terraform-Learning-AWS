@@ -21,8 +21,8 @@ provider "aws" {
 
 resource "aws_s3_bucket" "demo" {
   bucket = "vatika-terraform-backend-demo-2026"
-}
 
-tags = {
-  Environment = "dev"
+  tags = {
+    Environment = "dev"
+  }
 }
