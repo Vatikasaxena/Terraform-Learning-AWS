@@ -1,0 +1,55 @@
+name: Terraform Multi Environment CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+
+jobs:
+
+  terraform-dev:
+
+    name: DEV Deploy
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: dev
+
+    defaults:
+      run:
+        working-directory: terraform-environment-practice/environments/dev
+
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+
+    - name: Configure AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::834107150638:role/Terraform-CICD
+        aws-region: ap-south-1
+
+
+    - name: Terraform Init
+      run: terraform init
+
+
+    - name: Terraform Plan
+      run: terraform plan
+
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
